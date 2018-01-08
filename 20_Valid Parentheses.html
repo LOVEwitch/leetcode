@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+var isValid = function(s) {
+     let ss = s.split('')
+     let stacks = [];
+
+     for (var i = 0; i < ss.length; i++) {
+        if (ss[i] == "(") {
+            stacks.push(")")
+        } else if (ss[i] == "{") {
+            stacks.push("}")
+        } else if (ss[i] == "[") {
+            stacks.push("]")
+        } else if (stacks.length === 0 || stacks.pop() != ss[i]) {
+            return false;
+        }   
+     }
+    return stacks.length === 0;
+ 
+};
+console.log(isValid("([)]"));
+</script>
+</body>
+</html>
