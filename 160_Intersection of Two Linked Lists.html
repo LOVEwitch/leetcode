@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    //边界条件判断
+    if(headA == null || headB == null) return null;
+    
+    var a = headA;
+    var b = headB;
+    // console.log(a,b)
+    //若a和b有不同的长度，在两次迭代后将会停止循环
+    while( a != b ){
+        //在第一次迭代结束时，我们将指针重置为另一个链表的头部
+        a = a == null? headB : a.next;
+        b = b == null? headA : b.next;    
+    }
+    console.log(a,b)
+    return a;
+};
+
+//定义链表
+function ListNode(val) {
+    this.val = val;
+    this.next = null;
+}
+var l1 = new ListNode(-1)
+var l11 = new ListNode('a1')
+var l12 = new ListNode('a2')
+var l3 = new ListNode('c1')
+var l4 = new ListNode('c2')
+var l5 = new ListNode('c3')
+l1.next = l11
+l11.next = l12
+l12.next = l3
+l3.next = l4
+l4.next = l5
+console.log(l1)
+var l2 = new ListNode(-1)
+var l21 = new ListNode('b1')
+var l22 = new ListNode('b2')
+var l23 = new ListNode('b3')
+
+l2.next = l21
+l21.next = l22
+l22.next = l23
+l23.next = l3
+
+console.log(l2)
+var res = new ListNode(-1)
+res = getIntersectionNode(l1.next,l2.next)
+console.log(res)
+</script>
+</body>
+</html>
