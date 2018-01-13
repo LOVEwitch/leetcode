@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ 镜像二叉树，即左结点的值等于右结点
+ 遍历一遍即可，时间复杂度O(n)
+ 可用递归或者迭代
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+ //迭代,push时先左子树的左结点，然后右子树的右结点，然后左子树的右结点，然后右子树的左结点
+var isSymmetric = function(root) {
+    if(root.val == undefined) return;
+    var q = new Array()
+    q.push(root)
+    q.push(root)
+    while(q.length !=0) {
+        var t1 = q.shift();
+        var t2 = q.shift();
+        if (t1 == undefined && t2 == undefined) continue;
+        if (t1 == undefined || t2 == undefined) return false;
+        if (t1.val != t2.val) return false;
+        q.push(t1.left);
+        q.push(t2.right);
+        q.push(t1.right);
+        q.push(t2.left);
+    }
+        
+    return true
+};
+//递归
+var isSymmetric1 = function(root) {
+    return isMirror(root,root)
+};
+function isMirror(t1, t2) {
+    if (t1 == null && t2 == null) return true;
+    if (t1 == null || t2 == null) return false;
+    return (t1.val == t2.val)
+        && isMirror(t1.right, t2.left)
+        && isMirror(t1.left, t2.right);
+}
+function TreeNode(val) {
+    this.val = val;
+    this.left = this.right = null;
+}
+var root = new TreeNode()
+var root = new TreeNode(1)
+root.left = new TreeNode(2)
+root.right = new TreeNode(2)
+root.left.left = new TreeNode(3)
+root.left.right = new TreeNode(4)
+root.right.left = new TreeNode(4)
+root.right.right = new TreeNode(3)
+
+document.write(isSymmetric(root))
+document.write(isSymmetric1(root))
+</script>
+</body>
+</html>
