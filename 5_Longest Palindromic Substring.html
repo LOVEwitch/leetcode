@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * @param {string} s
+ * @return {string}
+ 解题思路：
+ 首先要遍历一遍，因此最外层0-length值循环
+ 在i值处找回文，如果是连续相同的值则++k，
+ 然后从跳过k值处检查左边与k值对应位置二者是否相同
+ 并保存开始位置和最大长度
+ */
+var longestPalindrome = function(s) {
+	if (s.length == 0) return;
+	if(s.length < 2) return s;
+	var min_start = 0,max_len = 1,arr = s.split("")
+
+	for (var i = 0; i < s.length; ) {
+		if(s.length - i <= max_len/2 ) break;
+		var k = i, j = i
+		while(k < s.length && arr[k] == arr[k+1]) ++k;
+		i = k+1;
+		while(k < s.length && j>0 && arr[k+1]==arr[j-1]) ++k,--j;
+		var new_len = k-j+1;
+		if(new_len > max_len) max_len = new_len,min_start = j
+	}
+	
+	return s.substring(min_start,min_start+max_len)
+    
+};
+document.write(longestPalindrome("abbaa"));
+</script>
+</body>
+</html>
