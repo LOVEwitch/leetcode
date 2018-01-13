@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+ //时间复杂度O(n2),空间复杂度O(1)
+
+var maxProfit = function(prices) {
+    var dif = 0;
+    for (var i = 0; i < prices.length-1; i++) {
+        debugger
+        for (var j = i+1; j < prices.length; j++) {
+            var k = prices[j] - prices[i]
+            dif = Math.max(dif, k)
+        }
+    }
+    return dif;
+};
+//最大差值即为最小值后的最大值减去它，时间复杂度O(n),空间复杂度O(1)
+var maxProfit1 = function(prices) {
+    var minprice = Math.pow(2,53)-1,maxprofit = 0
+    for (var i = 0; i < prices.length; i++) {
+        minprice = Math.min(prices[i],minprice)
+        maxprofit = Math.max((prices[i]-minprice), maxprofit)
+    }
+    return maxprofit;
+};
+document.write(maxProfit([7, 1, 5, 3, 6, 4]))
+document.write(maxProfit1([7, 6, 4, 3, 1]))
+</script>
+</body>
+</html>
