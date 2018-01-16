@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+Given n non-negative integers a1, a2, ..., an, where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of line i is at (i, ai) and (i, 0). Find two lines, which together with x-axis forms a container, such that the container contains the most water.
+
+Note: You may not slant the container and n is at least 2.
+*/
+/*
+最大面积为两条垂直线之间的宽与两条线最低的乘积
+解法1:循环两遍，i外层，j内层，area = (h[j]-h[i])*Min(h[i],h[j])
+解法2:两个指针，h[i]<h[j]时i++，否则j--
+*/
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height) {
+    if (height.length < 2) return;
+    var i = 0, j = height.length-1,maxarea = 0
+    while(i<j){
+    	maxarea = Math.max(maxarea,Math.min(height[i],height[j])*(j-i))
+    	if (height[i] < height[j]) {
+    		i++;
+    	} else {
+    		j--;
+    	}
+    }
+    return maxarea
+};
+document.write(maxArea([3,5,1,2,4]));
+</script>
+</body>
+</html>
