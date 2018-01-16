@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+//Write a function to find the longest common prefix string amongst an array of strings.
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+ /*
+ 解法1:水平扫描：
+ 设prefix=strs[0],每个strs的元素都与其比较，不包含则prefix-1
+public String longestCommonPrefix(String[] strs) {
+    if (strs.length == 0) return "";
+    String prefix = strs[0];
+    for (int i = 1; i < strs.length; i++)
+        while (strs[i].indexOf(prefix) != 0) {
+            prefix = prefix.substring(0, prefix.length() - 1);
+            if (prefix.isEmpty()) return "";
+        }        
+    return prefix;
+}
+ 解法2:垂直扫描：
+ 最外层循环为strs[0]的长度，判断其它strs子元素相同位置上与strs[0]的字符是否一致
+ 解法3:分治
+ 解法4:二叉搜索
+
+ */
+var longestCommonPrefix = function(strs) {
+    if (strs.length == 0) return
+    for (var i = 0; i < strs[0].length; i++) {
+        var c = strs[0].charAt(i)
+        for (var j = 1; j < strs.length; j++) {
+            if (strs[j].charAt(i) != c || i == strs[j].length) {
+                return strs[0].substring(0,i)
+            }
+        }
+    }
+    return strs[0]
+    
+};
+
+document.write(longestCommonPrefix(["abcd","abce","ab"]));
+</script>
+</body>
+</html>
