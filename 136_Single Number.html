@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * @param {number[]} nums
+ * @return {number}
+Given an array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+ */
+//两个相同的数异或为0，0异或某数字为某数字
+var singleNumber1 = function(nums) {
+    if (nums.length == 0 ) return;
+    var s = 0
+    for (var i = 0; i < nums.length; i++) {
+        s ^= nums[i]
+    }
+    return s
+};
+//2*(a+b+c)-(a+b+c+c+b)=a
+var singleNumber2 = function(nums) {
+    var set = new Set(nums)
+    var sum_set = 0,sum_arr = 0
+    for (var x of set) {
+        sum_set += x;
+    }
+    for(var y of nums) {
+        sum_arr += y
+    }
+    return sum_set*2-sum_arr
+};
+//x出现一次则obj[x]=0,两次则obj[x]=1
+var singleNumber3 = function(nums) {
+    var obj = {}
+    for (var x of nums) {
+        if (obj[x] == undefined) {
+            obj[x] = 0
+        } else {
+            obj[x] = 1
+        }
+    }
+    for (var x of nums) {
+        if (obj[x] == 0) {
+            return x;
+        }
+    }
+};
+document.write(singleNumber3([1,2,3,2,3]))
+</script>
+</body>
+</html>
