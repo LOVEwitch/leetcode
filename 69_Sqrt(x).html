@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+ /*牛顿迭代法
+ x(n+1)=(x(n)+/x(n))/2
+ 参考牛顿迭代法求平方根
+ http://blog.csdn.net/young_gy/article/details/45766433
+*/
+var mySqrt = function(x) {
+    var r = x;
+    while(r*r > x) {
+    	r = ((r + x/r)/2) | 0 ;
+    	//js按位与0表示取整，因为浮点数不支持位运算
+    }
+    return r
+};
+//也可尝试二分法
+/*
+public int sqrt(int x) {
+    if (x == 0)
+        return 0;
+    int left = 1, right = Integer.MAX_VALUE;
+    while (true) {
+        int mid = left + (right - left)/2;
+        if (mid > x/mid) {
+            right = mid - 1;
+        } else {
+            if (mid + 1 > x/(mid + 1))
+                return mid;
+            left = mid + 1;
+        }
+    }
+}
+*/
+
+
+document.write(mySqrt(8),"111")
+</script>
+</body>
+</html>
