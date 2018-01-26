@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/*Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+getMin() -- Retrieve the minimum element in the stack.
+Example:
+MinStack minStack = new MinStack();
+minStack.push(-2); 0
+minStack.push(0); 0 2
+minStack.push(-3); 0 2 -1 
+minStack.getMin();   --> Returns -3.
+minStack.pop();
+minStack.top();      --> Returns 0.
+minStack.getMin();   --> Returns -2.
+*/
+/**
+ * initialize your data structure here.
+ */
+//定义两个栈，一个存所有值，另一个存最小值
+var MinStack = function() {
+    this.stack1 = new Array();
+    this.stack2 = new Array();
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MinStack.prototype.push = function(x) {
+	this.stack1.push(x)
+    if (this.stack2.length == 0 || x <= this.getMin()) {
+    	this.stack2.push(x)
+    }else{
+    	this.stack2.push(this.getMin())
+    }
+    console.log(this.stack1,this.stack2,"pushpush11")
+    
+};
+
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+    
+    this.stack1.pop()
+	this.stack2.pop()
+	console.log(this.stack1,this.stack2,"poppop")
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+	if (this.stack1.length == 0) return;
+    return this.stack1[this.stack1.length-1]
+    console.log(this.stack1,this.stack2,"toptop")
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function() {
+	if (this.stack2.length == 0) return
+    return this.stack2[this.stack2.length-1]
+	console.log(this.stack1,this.stack2,"minmin")
+};
+
+/** 
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = Object.create(MinStack).createNew()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
+
+var minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0); 
+minStack.push(-3);  
+minStack.getMin();  
+document.write(minStack.getMin()) 
+minStack.pop();
+minStack.top(); 
+document.write(minStack.top())      
+minStack.getMin();  
+document.write(minStack.getMin())  
+// document.write(hasCycle(l0))
+</script>
+</body>
+</html>
