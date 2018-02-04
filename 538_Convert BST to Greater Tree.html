@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+
+var convertBST = function(root) {
+    sum = 0;
+    return convertBST1(root)
+};
+
+var convertBST1 = function(root) {
+    if (root != null) {
+    	convertBST1(root.right)
+    	sum += root.val
+    	root.val = sum
+    	convertBST1(root.left)
+    }
+    return root
+};
+var convertBST2 = function(root) {
+	var sum = 0,node = root,stack = []
+    while(stack.length != 0 || node != null){
+    	while(node != null){
+    		stack.push(node)
+    		node = node.right
+    	}
+    	node = stack.pop()
+        sum += node.val
+        node.val = sum
+        node = node.left
+    	
+    }
+    return root
+};
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = null;
+}
+var root = new TreeNode(2)
+root.left = new TreeNode(1)
+root.right = new TreeNode(3)
+console.log(convertBST1(root))
+</script>
+</body>
+</html>
