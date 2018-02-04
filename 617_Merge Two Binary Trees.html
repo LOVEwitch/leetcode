@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} t1
+ * @param {TreeNode} t2
+ * @return {TreeNode}
+ */
+var mergeTrees1 = function(t1, t2) {
+    if (t1 == null) {
+        return t2
+    }
+    if (t2 == null) {
+        return t1
+    }
+    t1.val = t1.val + t2.val
+    t1.left = mergeTrees(t1.left, t2.left)
+    t1.right = mergeTrees(t1.right, t2.right)
+    return t1
+};
+var mergeTrees2 = function(t1, t2) {
+    if (t1 == null) {
+        return t2
+    }
+    var t = [];
+    t.push({"t1":t1, "t2":t2})
+    while(t.length !=0){
+        
+        var node = t.pop()
+        
+        if (node["t1"] == null || node["t2"] == null) {
+            continue;
+        }
+        node["t1"].val += node["t2"].val
+        
+        if (node["t1"].left == null) {
+            node["t1"].left = node["t2"].left
+        } else {
+            t.push({"t1":node["t1"].left, "t2":node["t2"].left})
+        }
+        if (node["t1"].right == null) {
+            node["t1"].right = node["t2"].right
+        } else {
+            t.push({"t1":node["t1"].right, "t2":node["t2"].right})
+        }
+
+    }
+    return t1
+};
+
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = null;
+}
+var t1 = new TreeNode(1)
+t1.left = new TreeNode(3)
+t1.right = new TreeNode(2)
+t1.left.left = new TreeNode(5)
+var t2 = new TreeNode(2)
+t2.left = new TreeNode(1)
+t2.right = new TreeNode(3)
+t2.left.right = new TreeNode(4)
+t2.right.right = new TreeNode(7)
+console.log(mergeTrees2(t1, t2))
+</script>
+</body>
+</html>
