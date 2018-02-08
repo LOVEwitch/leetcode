@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+// Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+
+var diameterOfBinaryTree = function(root) {
+    ans = 1;
+    depth(root);
+    return ans - 1;
+};
+
+var depth = function(node) {
+    if (node == null) return 0;
+    var L = depth(node.left);
+    var R = depth(node.right);
+    ans = Math.max(ans, L+R+1);
+    return Math.max(L, R) + 1;
+};
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = null;
+}
+var root = new TreeNode(1)
+root.left = new TreeNode(2)
+root.left.left = new TreeNode(4)
+root.left.right = new TreeNode(5)
+root.right = new TreeNode(3)
+console.log(diameterOfBinaryTree(root))
+</script>
+</body>
+</html>
