@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+// Given two non-empty binary trees s and t, check whether tree t has exactly the same structure and node values with a subtree of s. A subtree of s is a tree consists of a node in s and all of this node's descendants. The tree s could also be considered as a subtree of itself.
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} s
+ * @param {TreeNode} t
+ * @return {boolean}
+ */
+
+// Time complexity : O(m*n). In worst case(skewed tree) traverse function takes O(m*n) time.
+
+// Space complexity : O(n)O(n). The depth of the recursion tree can go upto n. n refers to the number of nodes in s.
+var isSubtree = function(s, t) {
+    return traverse(s, t)
+};
+
+function traverse(s, t) {
+    return s!=null &&( equals (s,t) || traverse(s.left,t) || traverse(s.right,t))
+}
+
+function equals(s,t) {
+    if (s==null && t==null) {
+        return true;
+    }
+    if (s == null || t == null) {
+        return false;
+    }
+    return s.val == t.val && equals(s.left,t.left) && equals(s.right,t.right)
+}
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = null;
+}
+var s1 = new TreeNode(3)
+s1.left = new TreeNode(4)
+s1.left.left = new TreeNode(1)
+s1.left.right = new TreeNode(2)
+s1.right = new TreeNode(5)
+
+var t1 = new TreeNode(4)
+t1.left = new TreeNode(1)
+t1.right = new TreeNode(2)
+document.write(isSubtree(s1, t1))
+var s2 = new TreeNode(3)
+s2.left = new TreeNode(4)
+s2.left.left = new TreeNode(1)
+s2.left.right = new TreeNode(2)
+s2.left.right.left = new TreeNode(0)
+s2.right = new TreeNode(5)
+
+var t2 = new TreeNode(4)
+t2.left = new TreeNode(1)
+t2.right = new TreeNode(2)
+document.write(isSubtree(s2, t2))
+</script>
+</body>
+</html>
