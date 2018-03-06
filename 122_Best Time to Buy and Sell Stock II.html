@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+/*Say you have an array for which the ith element is the price of a given stock on day i.
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+ 
+//山峰-山谷
+var maxProfit1 = function(prices) {
+	var maxprofit = 0;
+	var i = 0;
+	var peak = prices[0];
+	var valley = prices[0];
+	while(i < prices.length-1) {
+		while(i < prices.length-1 && prices[i] > prices[i+1])
+			i++;
+		valley = prices[i];
+		while(i < prices.length-1 && prices[i] < prices[i+1])
+			i++;
+		peak = prices[i];
+		maxprofit += peak - valley
+	}
+    return maxprofit;
+};
+
+//连续多次交易的差值等于山峰-山谷
+var maxProfit = function(prices) {
+	var maxprofit = 0
+	for (var i = 1; i < prices.length; i++) {
+		if (prices[i] > prices[i-1]) {
+			maxprofit += prices[i] - prices[i-1]
+		}
+	}
+    return maxprofit;
+};
+
+// var maxProfit1 = function(prices) {
+    
+//     return maxprofit;
+// };
+// document.write(maxProfit([7, 1, 5, 3, 6, 4]))
+document.write(maxProfit1([7, 6, 4, 3, 1, 5]))
+</script>
+</body>
+</html>
